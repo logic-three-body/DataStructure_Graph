@@ -44,7 +44,7 @@ void CreateMGraph(MGraph *G)
 
 int main(void)
 {    
-	MGraph G;    
+	MGraph G;     
 	CreateMGraph(&G);
 	
 	return 0;

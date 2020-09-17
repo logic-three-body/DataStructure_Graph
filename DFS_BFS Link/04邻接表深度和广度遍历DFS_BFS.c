@@ -260,7 +260,7 @@ void BFSTraverse(GraphAdjList GL)
 }
 
 int main(void)
-{    
+{  
 	MGraph G;  
 	GraphAdjList GL;    
 	CreateMGraph(&G);

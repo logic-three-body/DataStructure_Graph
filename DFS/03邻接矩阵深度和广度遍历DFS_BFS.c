@@ -20,6 +20,8 @@ typedef int EdgeType; /* 边上的权值类型应由用户定义 */
 #define MAXVEX 9
 #define INFINITY 65535
 
+/* 关于无向图元素的确定可通过二维数组的i j 坐标确定*/
+
 typedef struct
 {
 	VertexType vexs[MAXVEX]; /* 顶点表 */
@@ -128,7 +130,7 @@ void CreateMGraph(MGraph *G)
 	G->arc[6][7]=1; 
 
 	
-	for(i = 0; i < G->numVertexes; i++)
+	for(i = 0; i < G->numVertexes; i++)//无向图完善另一向
 	{
 		for(j = i; j < G->numVertexes; j++)
 		{
@@ -147,7 +149,7 @@ void DFS(MGraph G, int i)
  	visited[i] = TRUE;
  	printf("%c ", G.vexs[i]);/* 打印顶点，也可以其它操作 */
 	for(j = 0; j < G.numVertexes; j++)
-		if(G.arc[i][j] == 1 && !visited[j])
+		if(G.arc[i][j] == 1 && !visited[j])//!visited[j]：已经遍历过此点，防止重复操作
  			DFS(G, j);/* 对为访问的邻接顶点递归调用 */
 }
 
@@ -190,6 +192,7 @@ void BFSTraverse(MGraph G)
 						EnQueue(&Q,j);				/* 将找到的此顶点入队列  */
 					} 
 				} 
+
 			}
 		}
 	}
