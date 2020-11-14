@@ -15,9 +15,9 @@ typedef char GElemType;
 
 typedef struct
 {
-	GElemType vexs[MAXVEX] = {0};
+	GElemType vexs[MAXVEX] = { 0 };
 	int arc[MAXVEX][MAXVEX] = { {0} };
-	int numVertexes=0, numEdges=0;
+	int numVertexes = 0, numEdges = 0;
 }MGraph;
 
 typedef int Patharc[MAXVEX];    /* 用于存储最短路径下标的数组 */
@@ -26,7 +26,7 @@ typedef int ShortPathTable[MAXVEX];/* 用于存储到各点最短路径的权值
 /* 构件图 */
 void CreateMGraph(MGraph *G)
 {
-	int i=0, j=0;
+	int i = 0, j = 0;
 
 	/* printf("请输入边数和城市个数（顶点数）:"); */
 
@@ -36,7 +36,7 @@ void CreateMGraph(MGraph *G)
 	std::cin >> G->numVertexes;
 	std::cin >> G->numEdges;
 
-	if (!G->numEdges&&!G->numVertexes)
+	if (!G->numEdges && !G->numVertexes)
 	{
 		return;
 	}
@@ -107,12 +107,12 @@ void CreateMGraph(MGraph *G)
 void ShortestPath_Dijkstra(MGraph G, int start, Patharc *P, ShortPathTable *D)
 {
 	int v, w, k, min;
-	int final[MAXVEX] = {0};/* final[w]=1表示求得顶点v0至vw的最短路径 */
+	int final[MAXVEX] = { 0 };/* final[w]=1表示求得顶点v0至vw的最短路径 */
 	for (v = 0; v < G.numVertexes; v++)    /* 初始化数据 */
 	{
 		final[v] = 0;			/* 全部顶点初始化为未知最短路径状态 */
 		(*D)[v] = G.arc[start][v];/* 将与start点有连线的顶点加上权值 */
-		(*P)[v] = 0;				/* 初始化路径数组P为start  */
+		(*P)[v] = -1;				/* 初始化路径数组P为start  */
 	}
 
 	(*D)[start] = 0;  /* v0至v0路径为0 */
@@ -145,6 +145,17 @@ void ShortestPath_Dijkstra(MGraph G, int start, Patharc *P, ShortPathTable *D)
 
 }
 
+void  OutPut2(MGraph G, Patharc &P, ShortPathTable &D, int start, int end)
+{
+	printf("%d\n",D[end]);
+	while (P[end] != start)
+	{
+		printf("%c ", G.vexs[end]);
+		end = P[end];
+	}
+
+}
+
 void OutPut(MGraph G, Patharc &P, ShortPathTable &D, int start, int end)
 {
 	printf("%d\n", D[end]);
@@ -153,8 +164,8 @@ void OutPut(MGraph G, Patharc &P, ShortPathTable &D, int start, int end)
 	int len = G.numVertexes;
 	char *tmp = new char[len];
 	memset(tmp, 0, sizeof(tmp));
-	int k = len - 1;
-	while (end != start)
+	int k = len-1 ;
+	while (P[end] != -1)//倒序回溯
 	{
 		tmp[k--] = G.vexs[end];
 		end = P[end];
@@ -183,10 +194,10 @@ int main(void)
 	while (true)
 	{
 		MGraph G;
-		Patharc P = { -1 };
-		memset(P, -1, sizeof(P));
+		Patharc P;
+	//	memset(P, -1, sizeof(P));
 		ShortPathTable D; /* 求某点到其余各点的最短路径 */
-		CreateMGraph(&G);		
+		CreateMGraph(&G);
 		if (!G.numEdges && !G.numVertexes)
 		{
 			return 0;
@@ -194,7 +205,7 @@ int main(void)
 		std::cin >> start >> end;
 		ShortestPath_Dijkstra(G, start - 'A', &P, &D);
 		//TODO 输出指定最短路径长度	
-        //TODO 输出指定最短路径
+		//TODO 输出指定最短路径
 		OutPut(G, P, D, start - 'A', end - 'A');
 	}
 
