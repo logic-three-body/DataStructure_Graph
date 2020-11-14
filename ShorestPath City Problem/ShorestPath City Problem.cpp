@@ -1,5 +1,5 @@
 ﻿#include<iostream>
-
+#include<string.h>
 
 #define OK 1
 #define ERROR 0
@@ -8,16 +8,16 @@
 
 #define MAXEDGE 200
 #define MAXVEX 200
-#define INFINITY 65535
+#define INFINITY 0x3f3f3f3f
 
 typedef int Status;	/* Status是函数的类型,其值是函数结果状态代码，如OK等 */
 typedef char GElemType;
 
 typedef struct
 {
-	GElemType vexs[MAXVEX];
-	int arc[MAXVEX][MAXVEX];
-	int numVertexes, numEdges;
+	GElemType vexs[MAXVEX] = {0};
+	int arc[MAXVEX][MAXVEX] = { {0} };
+	int numVertexes=0, numEdges=0;
 }MGraph;
 
 typedef int Patharc[MAXVEX];    /* 用于存储最短路径下标的数组 */
@@ -90,14 +90,14 @@ void CreateMGraph(MGraph *G)
 	//G->arc[7][8] = 4;
 
 
-	//for (i = 0; i < G->numVertexes; i++)
-	//{
-	//	for (j = i; j < G->numVertexes; j++)
-	//	{
-	//		//G->arc[j][i] = G->arc[i][j];
+	for (i = 0; i < G->numVertexes; i++)
+	{
+		for (j = i; j < G->numVertexes; j++)
+		{
+			//G->arc[j][i] = G->arc[i][j];
 
-	//	}
-	//}
+		}
+	}
 
 }
 
@@ -107,12 +107,12 @@ void CreateMGraph(MGraph *G)
 void ShortestPath_Dijkstra(MGraph G, int start, Patharc *P, ShortPathTable *D)
 {
 	int v, w, k, min;
-	int final[MAXVEX];/* final[w]=1表示求得顶点v0至vw的最短路径 */
+	int final[MAXVEX] = {0};/* final[w]=1表示求得顶点v0至vw的最短路径 */
 	for (v = 0; v < G.numVertexes; v++)    /* 初始化数据 */
 	{
 		final[v] = 0;			/* 全部顶点初始化为未知最短路径状态 */
-		(*D)[v] = G.arc[start][v];/* 将与v0点有连线的顶点加上权值 */
-		(*P)[v] = start;				/* 初始化路径数组P为  */
+		(*D)[v] = G.arc[start][v];/* 将与start点有连线的顶点加上权值 */
+		(*P)[v] = 0;				/* 初始化路径数组P为start  */
 	}
 
 	(*D)[start] = 0;  /* v0至v0路径为0 */
@@ -152,7 +152,7 @@ void OutPut(MGraph G, Patharc &P, ShortPathTable &D, int start, int end)
 
 	int len = G.numVertexes;
 	char *tmp = new char[len];
-
+	memset(tmp, 0, sizeof(tmp));
 	int k = len - 1;
 	while (end != start)
 	{
@@ -165,6 +165,7 @@ void OutPut(MGraph G, Patharc &P, ShortPathTable &D, int start, int end)
 		if (k == len - 1)
 		{
 			printf("%c", tmp[k++]);
+			//return;
 		}
 		else
 		{
@@ -177,15 +178,15 @@ void OutPut(MGraph G, Patharc &P, ShortPathTable &D, int start, int end)
 int main(void)
 {
 
-	MGraph G;
-	Patharc P;
-	ShortPathTable D; /* 求某点到其余各点的最短路径 */
-	char start = 0, end = 0;
 
+	char start = 0, end = 0;
 	while (true)
 	{
-		CreateMGraph(&G);
-		
+		MGraph G;
+		Patharc P = { -1 };
+		memset(P, -1, sizeof(P));
+		ShortPathTable D; /* 求某点到其余各点的最短路径 */
+		CreateMGraph(&G);		
 		if (!G.numEdges && !G.numVertexes)
 		{
 			return 0;
