@@ -25,6 +25,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shorest_Path City Vector", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shorest_Path_Struct", "Shorest_Path_Struct\Shorest_Path_Struct.vcxproj", "{AC3B443B-DF10-4E8C-9D95-CDFDF170A70F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Six Degree Theory", "Six Degree Theory\Six Degree Theory.vcxproj", "{4F61B24A-D3C7-4780-90B4-452817A11ED9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -121,6 +123,14 @@ Global
 		{AC3B443B-DF10-4E8C-9D95-CDFDF170A70F}.Release|x64.Build.0 = Release|x64
 		{AC3B443B-DF10-4E8C-9D95-CDFDF170A70F}.Release|x86.ActiveCfg = Release|Win32
 		{AC3B443B-DF10-4E8C-9D95-CDFDF170A70F}.Release|x86.Build.0 = Release|Win32
+		{4F61B24A-D3C7-4780-90B4-452817A11ED9}.Debug|x64.ActiveCfg = Debug|x64
+		{4F61B24A-D3C7-4780-90B4-452817A11ED9}.Debug|x64.Build.0 = Debug|x64
+		{4F61B24A-D3C7-4780-90B4-452817A11ED9}.Debug|x86.ActiveCfg = Debug|Win32
+		{4F61B24A-D3C7-4780-90B4-452817A11ED9}.Debug|x86.Build.0 = Debug|Win32
+		{4F61B24A-D3C7-4780-90B4-452817A11ED9}.Release|x64.ActiveCfg = Release|x64
+		{4F61B24A-D3C7-4780-90B4-452817A11ED9}.Release|x64.Build.0 = Release|x64
+		{4F61B24A-D3C7-4780-90B4-452817A11ED9}.Release|x86.ActiveCfg = Release|Win32
+		{4F61B24A-D3C7-4780-90B4-452817A11ED9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
