@@ -5,7 +5,7 @@ using namespace std;
 #define MAX 100
 typedef struct LNode
 {
-	int data;
+	int vdata;
 	struct LNode *next;
 }LNode, *LinkList;
 typedef struct
@@ -23,7 +23,7 @@ int CreateUDN(ALGragh &G, int vexnum, int arcnum)
 	for (int i = 1; i <= vexnum; i++)
 	{
 		G.V[i] = new LNode;
-		G.V[i]->data = i;
+		G.V[i]->vdata = i;
 		G.V[i]->next = NULL;
 	}
 	while (arcnum--)
@@ -31,11 +31,11 @@ int CreateUDN(ALGragh &G, int vexnum, int arcnum)
 		int x, y;
 		cin >> x >> y;
 		LinkList p = new LNode;
-		p->data = y;
+		p->vdata = y;
 		p->next = G.V[x]->next;
 		G.V[x]->next = p;
 		LinkList q = new LNode;
-		q->data = x;
+		q->vdata = x;
 		q->next = G.V[y]->next;
 		G.V[y]->next = q;
 	}
@@ -49,7 +49,7 @@ int DeleteArc(ALGragh &G)
 	q = G.V[i];
 	while (q->next)
 	{
-		if (q->next->data == j)
+		if (q->next->vdata == j)
 		{
 			q->next = q->next->next;
 			G.arcnum--;
@@ -60,7 +60,7 @@ int DeleteArc(ALGragh &G)
 	q = G.V[j];
 	while (q->next)
 	{
-		if (q->next->data == i)
+		if (q->next->vdata == i)
 		{
 			LinkList tmp = nullptr;
 			tmp = q->next;
@@ -80,10 +80,10 @@ int PrintGraph(ALGragh G)
 		LinkList p = G.V[i];
 		while (p->next)
 		{
-			cout << p->data << " ";
+			cout << p->vdata << " ";
 			p = p->next;
 		}
-		cout << p->data << endl;
+		cout << p->vdata << endl;
 	}
 	return OK;
 }
