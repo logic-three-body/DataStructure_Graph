@@ -33,7 +33,7 @@ int DeleteVex(AMGragh &G)
 	int i, j, x;
 	cin >> x;
 	for (i = 0; i <= G.vexnum; i++)
-		for (j = x; j < G.vexnum; j++)//把删除的点移出去，但只适用于删除最后的点
+		for (j = x; j < G.vexnum; j++)//把删除的点移出去
 			G.vexs[i][j] = G.vexs[i][j + 1];
 	for (j = 0; j <= G.vexnum; j++)
 		for (i = x; i < G.vexnum; i++)
