@@ -1,20 +1,109 @@
-﻿// Adjacent List path K.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
-//
-
-#include <iostream>
-
-int main()
+﻿#include<iostream>
+#include<string>
+#include<cstring>
+using namespace std;
+#define MaxSize 100
+using namespace std;
+typedef struct ArcNode
 {
-    std::cout << "Hello World!\n";
+	int adjvex;                 //该边所指向的结点的位置（也就是编号）
+	struct ArcNode *nextarc;    //指向下一条边的指针
+	int info;                   //
+}ArcNode;
+
+typedef struct
+{
+	char data;                  //顶点信息
+	ArcNode *firstarc;          //指向第一条边的指针
+}VNode;
+typedef struct
+{
+	VNode adjlist[MaxSize];
+	int n, e;                    //顶点数、边数
+}AGraph;                        //图的邻接表类型
+int visit[MaxSize];
+int Locate(AGraph *AG, char c)
+{
+	for (int i = 0; i < AG->n; i++)
+	{
+		if (AG->adjlist[i].data == c)
+			return i;
+	}
+}
+int nodenum = 0;
+bool DFS(AGraph *G, int v, int w, int k)
+{
+	ArcNode *p;
+	visit[v] = ++nodenum;
+	if (v == w && k == 0)//置标志位1代表已访问
+		return true;
+	else
+		if (k > 0)
+		{
+			p = G->adjlist[v].firstarc;
+			while (p)
+			{
+				if (visit[p->adjvex] == 0 && DFS(G, p->adjvex, w, k - 1))
+				{
+					return true;
+				}
+				visit[p->adjvex] = 0;
+				nodenum--;
+				p = p->nextarc;
+			}
+
+		}
+	return false;
+}
+//创建无向图的邻接表
+void createAGraph2(AGraph *&AG, int t, int p)
+{
+	int i, j, k;
+	ArcNode *q;
+	AG->n = t;
+	AG->e = p;
+	string b;
+	cin >> b;
+	for (i = 0; i < AG->n; i++)
+	{
+		AG->adjlist[i].data = b[i];
+		AG->adjlist[i].firstarc = NULL;
+	}
+	string cc;
+	for (k = 0; k < AG->e; ++k)
+	{
+		cin >> cc;
+		//头插法
+		i = Locate(AG, cc[0]);
+		j = Locate(AG, cc[1]);
+		q = new ArcNode;
+		q->adjvex = j;
+		q->nextarc = AG->adjlist[i].firstarc;
+		AG->adjlist[i].firstarc = q;
+
+		q = new ArcNode;
+		q->adjvex = i;
+		q->nextarc = AG->adjlist[j].firstarc;
+		AG->adjlist[j].firstarc = q;
+
+	}
 }
 
-// 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
-// 调试程序: F5 或调试 >“开始调试”菜单
+AGraph *AG;
+int main()
+{
+	int n, m, k;
+	while (cin >> n >> m >> k && k != 0 || n != 0 || m != 0)
+	{
+		AG = new AGraph;
+		createAGraph2(AG, n, m);
+		string a;
+		cin >> a;//查询的两个顶点
 
-// 入门使用技巧: 
-//   1. 使用解决方案资源管理器窗口添加/管理文件
-//   2. 使用团队资源管理器窗口连接到源代码管理
-//   3. 使用输出窗口查看生成输出和其他消息
-//   4. 使用错误列表窗口查看错误
-//   5. 转到“项目”>“添加新项”以创建新的代码文件，或转到“项目”>“添加现有项”以将现有代码文件添加到项目
-//   6. 将来，若要再次打开此项目，请转到“文件”>“打开”>“项目”并选择 .sln 文件
+		if (DFS(AG, Locate(AG, a[0]), Locate(AG, a[1]), k))
+			cout << "YES" << endl;
+		else
+			cout << "NO" << endl;
+	}
+	return 0;
+}
