@@ -49,7 +49,7 @@ int InsertArc(ALGragh &G)
 	p->data = y;
 	p->next = G.V[x]->next;
 	G.V[x]->next = p;
-	G.arcnum++;
+	//G.arcnum++;
 	LinkList q = new LNode;
 	q->data = x;
 	q->next = G.V[y]->next;
