@@ -55,6 +55,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DFS juding Existing Path", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Adjacent List path K", "Adjacent List path K\Adjacent List path K.vcxproj", "{3D0A122C-F45E-48F0-AF91-00DE13ACF147}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ForyShorest", "ForyShorest\ForyShorest.vcxproj", "{CF483477-2800-419B-B351-FCEE0C7BBCDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -271,6 +273,14 @@ Global
 		{3D0A122C-F45E-48F0-AF91-00DE13ACF147}.Release|x64.Build.0 = Release|x64
 		{3D0A122C-F45E-48F0-AF91-00DE13ACF147}.Release|x86.ActiveCfg = Release|Win32
 		{3D0A122C-F45E-48F0-AF91-00DE13ACF147}.Release|x86.Build.0 = Release|Win32
+		{CF483477-2800-419B-B351-FCEE0C7BBCDA}.Debug|x64.ActiveCfg = Debug|x64
+		{CF483477-2800-419B-B351-FCEE0C7BBCDA}.Debug|x64.Build.0 = Debug|x64
+		{CF483477-2800-419B-B351-FCEE0C7BBCDA}.Debug|x86.ActiveCfg = Debug|Win32
+		{CF483477-2800-419B-B351-FCEE0C7BBCDA}.Debug|x86.Build.0 = Debug|Win32
+		{CF483477-2800-419B-B351-FCEE0C7BBCDA}.Release|x64.ActiveCfg = Release|x64
+		{CF483477-2800-419B-B351-FCEE0C7BBCDA}.Release|x64.Build.0 = Release|x64
+		{CF483477-2800-419B-B351-FCEE0C7BBCDA}.Release|x86.ActiveCfg = Release|Win32
+		{CF483477-2800-419B-B351-FCEE0C7BBCDA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
